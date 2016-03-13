@@ -66,6 +66,38 @@ public class VarastoTest {
     }
 
     @Test
+    public void eiOtaLiikaa(){
+        varasto.lisaaVarastoon(5);
+        assertEquals(5, varasto.otaVarastosta(6),vertailuTarkkuus);
+    }
+    
+    @Test
+    public void eiLaitaLiikaa(){
+        varasto.lisaaVarastoon(11);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+     
+    @Test
+    public void jattaaSaldonOikeinKunOttaaLiikaa(){   
+        varasto.lisaaVarastoon(5);
+        varasto.otaVarastosta(6);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void eiLaitaNegatiivista(){
+       varasto.lisaaVarastoon(-2);
+       assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void eiOtaNegatiivista(){
+        varasto.lisaaVarastoon(5);
+        varasto.otaVarastosta(-2);
+        assertEquals(5, varasto.getSaldo(), vertailuTarkkuus);
+    }
+   
+    @Test
     public void konstr() {
         varasto = new Varasto(-1);
         varasto = new Varasto(0);
